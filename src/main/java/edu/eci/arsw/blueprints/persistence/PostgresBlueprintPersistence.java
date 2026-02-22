@@ -232,5 +232,21 @@ public class PostgresBlueprintPersistence implements BlueprintPersistence {
             return new Point(rs.getInt("x"), rs.getInt("y"));
         }
     }
+
+    // Elimina blueprint en la base de datos, por el delete cascade se eliminan automáticamente todos los puntos
+    
+    @Override
+    public void deleteBlueprint(String author, String name) throws BlueprintNotFoundException {
+        // Script para eliminar en SQL
+        String sql="DELETE FROM blueprints WHERE author = ? AND name = ?";
+
+        int rowsAffected = jdbc.update(sql, author, name);
+        if (rowsAffected == 0) {
+            throw new BlueprintNotFoundException(
+                "Blueprint not found for deletion: " + author + "/" + name
+            );
+        }
+    }
+
 }
 

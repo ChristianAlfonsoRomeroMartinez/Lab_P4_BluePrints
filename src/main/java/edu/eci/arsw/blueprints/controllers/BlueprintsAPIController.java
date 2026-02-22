@@ -26,6 +26,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
+// import para eliminar
+import org.springframework.web.bind.annotation.DeleteMapping;
+
+
 @RestController
 // /api/ es el separador de endpoints
 // /v1/ corresponde al versionamiento
@@ -145,4 +149,31 @@ public class BlueprintsAPIController {
             @NotBlank(message = "Name cannot be empty") String name,
             @Valid java.util.List<Point> points
     ) { }
+
+    // Elimina un blueprint especifico en el sistema 
+    //Controller recibe la peticion HTTP Delete
+    //Lo envia a services.deleteBlueprint(autor y nombre)
+    //Services lo envia a postgresblueprintspercistence 
+    //Se ejecta el script para eliminar en sql
+    //se activa de delete cascade por eso se elimina todo
+    //retornamos 200 o 404 si ya no existia
+
+    @Operation(
+        summary = "Eliminar un blueprint",
+        description = "Elimina un blueprint identificado por su autor y nombre. Se eliminan todos sus puntos asociados."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Blueprint eliminado exitosamente"),
+        @ApiResponse(responseCode = "404", description = "Blueprint no encontrado para eliminación")
+    })
+    @DeleteMapping("/{author}/{bpname}")
+    public ResponseEntity<edu.eci.arsw.blueprints.dto.ApiResponse<?>> deleteBlueprint(@PathVariable String author, @PathVariable String bpname) {
+        try {
+            services.deleteBlueprint(author, bpname);
+            return ResponseEntity.ok(edu.eci.arsw.blueprints.dto.ApiResponse.success("Blueprint eliminado"));
+        } catch (BlueprintNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(edu.eci.arsw.blueprints.dto.ApiResponse.notFound(e.getMessage()));
+    }
+}
 }
