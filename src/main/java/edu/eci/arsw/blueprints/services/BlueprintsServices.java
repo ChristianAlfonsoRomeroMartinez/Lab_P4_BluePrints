@@ -42,6 +42,6 @@ public class BlueprintsServices {
 
     //Elimina un blueprint y se delega a persistencia
     public void deleteBlueprint(String author, String name) throws BlueprintNotFoundException {
-        bpp.deleteBlueprint(author, name);
+        persistence.deleteBlueprint(author, name);
     }
 }
