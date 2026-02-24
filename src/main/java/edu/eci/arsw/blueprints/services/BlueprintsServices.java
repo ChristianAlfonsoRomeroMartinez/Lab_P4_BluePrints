@@ -1,13 +1,14 @@
 package edu.eci.arsw.blueprints.services;
 
+import java.util.Set;
+
+import org.springframework.stereotype.Service;
+
 import edu.eci.arsw.blueprints.filters.BlueprintsFilter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistence;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
-import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 public class BlueprintsServices {
@@ -38,5 +39,10 @@ public class BlueprintsServices {
 
     public void addPoint(String author, String name, int x, int y) throws BlueprintNotFoundException {
         persistence.addPoint(author, name, x, y);
+    }
+
+    //Elimina un blueprint y se delega a persistencia
+    public void deleteBlueprint(String author, String name) throws BlueprintNotFoundException {
+        persistence.deleteBlueprint(author, name);
     }
 }
