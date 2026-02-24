@@ -1,12 +1,16 @@
 package edu.eci.arsw.blueprints.persistence;
 
-import edu.eci.arsw.blueprints.model.Blueprint;
-import edu.eci.arsw.blueprints.model.Point;
-import org.springframework.stereotype.Repository;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Repository;
+
+import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.model.Point;
 
 @Repository
 public class InMemoryBlueprintPersistence implements BlueprintPersistence {
@@ -61,5 +65,13 @@ public class InMemoryBlueprintPersistence implements BlueprintPersistence {
     public void addPoint(String author, String name, int x, int y) throws BlueprintNotFoundException {
         Blueprint bp = getBlueprint(author, name);
         bp.addPoint(new Point(x, y));
+    }
+
+    @Override
+    public void deleteBlueprint(String author, String name) throws BlueprintNotFoundException {
+        String k = keyOf(author, name);
+        if (blueprints.remove(k) == null) {
+            throw new BlueprintNotFoundException("Blueprint not found: %s/%s".formatted(author, name));
+        }
     }
 }

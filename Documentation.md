@@ -214,9 +214,7 @@ socket.emit('draw-event', {
 
 ## Video
 
-**Video YouTube (colaboración en tiempo real):**  
-> [**Insertar URL de YouTube aquí**](https://www.youtube.com/watch?v=...)
-
+> [**video test**]https://youtu.be/pSWxHTOkebA?si=IEsgPCqIHMqyj46M
 
 ---
 
