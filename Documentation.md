@@ -289,11 +289,11 @@ Lab_P4_BluePrints/
 
 ---
 
-## Repositorios Referencia
+## Repositorios Asociados
 
-- **REST API (este):** Lab_P4_BluePrints  
-- **STOMP (Spring):** https://github.com/DECSIS-ECI/example-backend-stopm/tree/main  
-- **Socket.IO (Node):** https://github.com/DECSIS-ECI/example-backend-socketio-node-/blob/main/README.md
+- **STOMP (Spring):** https://github.com/ChristianAlfonsoRomeroMartinez/Lb4-backend-stopm
+- **Socket.IO (Node):** https://github.com/ChristianAlfonsoRomeroMartinez/example-backend-socketio-node-
+- **Front:** https://github.com/ChristianAlfonsoRomeroMartinez/Lab_P4_BluePrints_RealTime-Sokets
 
 ---
 
